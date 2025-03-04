@@ -1,5 +1,5 @@
 # TTTN2025
 
-# su dung thu vien react-scroll,react-icons
+# cài đặt thêm và sử dụng thư viện react-scroll,react-icons,react-router-dom
 
-# nen tai cac thu vien tren sau khi cai node_modules
+# nên sử dụng các thư viện trên sau khi cài đặt node_modules

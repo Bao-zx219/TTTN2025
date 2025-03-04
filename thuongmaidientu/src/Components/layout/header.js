@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-import { animateScroll, Link as Links } from "react-scroll";
+
+import { Link } from "react-router-dom";
 import "../Css/header.css";
 import {
   CgChevronDown,
@@ -9,22 +10,8 @@ import {
 } from "react-icons/cg";
 import logo from "../../Assets/img/shopping.png";
 export default function Header() {
-  const [scrollHeader, setScrollHeader] = useState(false);
-  /*=========================scrolling===========================*/
-  const changeHeader = () => {
-    if (window.scrollY >= 80) {
-      setScrollHeader(true);
-    } else {
-      setScrollHeader(false);
-    }
-  };
-  const scrollTop = () => {
-    animateScroll.scrollToTop();
-  };
-  // scroll khi chuyen ve trang chu
-  useEffect(() => {
-    window.addEventListener("scroll", changeHeader);
-  }, []);
+  //#endregion
+  //#region Dropdown
   /*===========================thời gian hiển thị của dropdown=========================*/
   const [isHomeDropdownOpen, setIsHomeDropdownOpen] = useState(false);
   const [isShopDropdownOpen, setIsShopDropdownOpen] = useState(false);
@@ -32,15 +19,15 @@ export default function Header() {
   const [hoveredMenu, setHoverdMenu] = useState(false);
   useEffect(() => {
     let timer;
-    if (hoveredMenu == "home") {
+    if (hoveredMenu === "home") {
       setIsHomeDropdownOpen(true);
       setIsShopDropdownOpen(false);
       setIsAboutDropdownOpen(false);
-    } else if (hoveredMenu == "shop") {
+    } else if (hoveredMenu === "shop") {
       setIsShopDropdownOpen(true);
       setIsHomeDropdownOpen(false);
       setIsAboutDropdownOpen(false);
-    } else if (hoveredMenu == "about") {
+    } else if (hoveredMenu === "about") {
       setIsAboutDropdownOpen(true);
       setIsHomeDropdownOpen(false);
       setIsShopDropdownOpen(false);
@@ -53,8 +40,8 @@ export default function Header() {
     }
     return () => clearTimeout(timer);
   }, [hoveredMenu]);
-
-  /*===========================ô tìm kiếm=========================*/
+  //#endregion
+  //#region Tìm kiếm
   const searchInputRef = useRef(null);
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -78,13 +65,25 @@ export default function Header() {
     }
   };
 
+  //#endregion
+  // scroll to top
+  const ScrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  //#region luu trang thai khi click vao category
+  const handleCategoryClick = (slug) => {
+    localStorage.setItem("selectedCategory", slug);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+  //#endregion
   return (
     <div>
-      <header className={`${scrollHeader ? "scroll-header" : ""} header`}>
+      <header className="header">
         <nav className="nav container">
-          <Links to="/" onClick={scrollTop} className="nav__logo">
+          <Link to="/" className="nav__logo" onClick={ScrollToTop}>
             <img src={logo} alt="" className="nav__logo-img" />
-          </Links>
+          </Link>
           <div className="nav__left container">
             <ul className="nav__list">
               <li
@@ -108,19 +107,28 @@ export default function Header() {
                         </a>
                       </li>
                       <li className="">
-                        <a className="" href="#">
+                        <Link
+                          to="/category/thoi-trang"
+                          onClick={handleCategoryClick}
+                        >
                           thời trang
-                        </a>
+                        </Link>
                       </li>
                       <li className="">
-                        <a className="" href="#">
+                        <Link
+                          to="/category/cong-nghe"
+                          onClick={handleCategoryClick}
+                        >
                           Thiết bị điện tử
-                        </a>
+                        </Link>
                       </li>
                       <li className="">
-                        <a className="" href="#">
+                        <Link
+                          to="/category/doi-song"
+                          onClick={handleCategoryClick}
+                        >
                           nhà cửa & đời sống
-                        </a>
+                        </Link>
                       </li>
                     </ul>
                   </div>
@@ -143,34 +151,52 @@ export default function Header() {
                       </h3>
                       <ul className="">
                         <li className="">
-                          <a className="" href="#">
+                          <Link
+                            to="/category/all"
+                            onClick={handleCategoryClick}
+                          >
                             Tất cả sản phẩm
-                          </a>
+                          </Link>
                         </li>
                         <li className="">
-                          <a className="" href="#">
-                            phụ kiện
-                          </a>
+                          <Link
+                            to="/category/phu-kien"
+                            onClick={handleCategoryClick}
+                          >
+                            Phụ kiện
+                          </Link>
                         </li>
                         <li className="">
-                          <a className="" href="#">
-                            quần áo <span className="hot-tag">HOT</span>
-                          </a>
+                          <Link
+                            to="/category/thoi-trang"
+                            onClick={handleCategoryClick}
+                          >
+                            Quần áo <span className="hot-tag">HOT</span>
+                          </Link>
                         </li>
                         <li className="">
-                          <a className="" href="#">
-                            giày dép
-                          </a>
+                          <Link
+                            to="/category/giay-dep"
+                            onClick={handleCategoryClick}
+                          >
+                            Giày dép
+                          </Link>
                         </li>
                         <li className="">
-                          <a className="" href="#">
-                            công nghệ <span className="hot-tag">HOT</span>
-                          </a>
+                          <Link
+                            to="/category/do-choi"
+                            onClick={handleCategoryClick}
+                          >
+                            Đồ chơi <span className="hot-tag">HOT</span>
+                          </Link>
                         </li>
                         <li className="">
-                          <a className="" href="#">
-                            sách
-                          </a>
+                          <Link
+                            to="/category/nha-sach"
+                            onClick={handleCategoryClick}
+                          >
+                            Nhà sách <span className="hot-tag">HOT</span>
+                          </Link>
                         </li>
                       </ul>
                     </div>
@@ -180,10 +206,10 @@ export default function Header() {
                       </h3>
                       <ul className="">
                         <li className="">
-                          <a className="" href="#">
-                            sản phẩm theo loại{" "}
+                          <Link to="category/all" onClick={handleCategoryClick}>
+                            sản phẩm theo loại
                             <span className="hot-tag">HOT</span>
-                          </a>
+                          </Link>
                         </li>
                         <li className="">
                           <a className="" href="#">

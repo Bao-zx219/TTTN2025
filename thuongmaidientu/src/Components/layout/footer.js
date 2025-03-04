@@ -11,14 +11,20 @@ import {
 import { AiOutlinePhone } from "react-icons/ai";
 import { MdOutlineLocationOn } from "react-icons/md";
 import "../Css/footer.css";
+import { Link } from "react-router-dom";
+
 export default function Footer() {
+  const ScrollToTop = () => {
+    localStorage.removeItem("selectedCategory");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
   return (
     <footer className="footer">
       <div className="footer__grid container grid">
         <div className="footer__content">
-          <a href="/" className="footer__logo">
+          <Link to="/" className="footer__logo">
             <img src={logo} alt="" className="footer__logo-img" />
-          </a>
+          </Link>
           <p className="footer__description">
             Bạn thấy trang thương mại điện tử này như thế nào? có khiến bạn hài
             lòng hay thất vọng? hãy liên hệ và góp ý cho chúng tôi.
@@ -39,66 +45,50 @@ export default function Footer() {
           <h3 className="footer__title">Thông tin</h3>
           <ul className="footer__links">
             <li>
-              <a href="#about" className="footer__link">
-                <FaCaretRight className="icon" />
-              </a>
+              <Link to="/about" className="footer__link" onClick={ScrollToTop}>
+                <FaCaretRight className="icon" /> Về chúng tôi
+              </Link>
             </li>
             <li>
-              <a href="#menu" className="footer__link">
-                <FaCaretRight className="icon" />
-              </a>
-            </li>
-            <li>
-              <a href="#features" className="footer__link">
-                <FaCaretRight className="icon" />
-              </a>
-            </li>
-            <li>
-              <a href="#gallery" className="footer__link">
-                <FaCaretRight className="icon" />
-              </a>
-            </li>
-            <li>
-              <a href="#team" className="footer__link">
-                <FaCaretRight className="icon" />
-              </a>
-            </li>
-            <li>
-              <a href="#reservation" className="footer__link">
-                <FaCaretRight className="icon" />
-              </a>
+              <Link
+                to="/category/all"
+                className="footer__link"
+                onClick={ScrollToTop}
+              >
+                <FaCaretRight className="icon" /> Sản phẩm
+              </Link>
             </li>
           </ul>
         </div>
         <div className="footer__content">
           <h3 className="footer__title">Khuyến mãi</h3>
-          <div className="footer__opening-hour">
-            <ul className="opening__hour-list">
-              <li className="opening__hour-item">
+          <div className="footer__sale">
+            <ul className="sale-list">
+              <li className="sale-item">
                 <span></span>
                 <span></span>
               </li>
-              <li className="opening__hour-item">
+              <li className="sale-item">
                 <span></span>
                 <span></span>
               </li>
-              <li className="opening__hour-item">
+              <li className="sale-item">
                 <span></span>
                 <span></span>
               </li>
-              <li className="opening__hour-item">
+              <li className="sale-item">
                 <span></span>
                 <span></span>
               </li>
-              <li className="opening__hour-item">
+              <li className="sale-item">
                 <span></span>
                 <span></span>
               </li>
-              <li className="opening__hour-item">
+              <li className="sale-item">
                 <span></span>
                 <span></span>
               </li>
-              <li className="opening__hour-item">
+              <li className="sale-item">
                 <span></span>
                 <span></span>
               </li>
@@ -120,17 +110,25 @@ export default function Footer() {
           <div className="footer__socials">
             <h3 className="footer__social-follow">Theo dõi chúng tôi</h3>
             <div className="footer__social-links">
-              <div className="footer__social-link">
-                <FaFacebookF />
+              <div>
+                <Link to="/under-dev" className="footer__social-link">
+                  <FaFacebookF />
+                </Link>
               </div>
-              <div className="footer__social-link">
-                <FaTwitter />
+              <div>
+                <Link to="/under-dev" className="footer__social-link">
+                  <FaTwitter />
+                </Link>
               </div>
-              <div className="footer__social-link">
-                <FaLinkedinIn />
+              <div>
+                <Link to="/under-dev" className="footer__social-link">
+                  <FaLinkedinIn />
+                </Link>
               </div>
-              <div className="footer__social-link">
-                <FaYoutube />
+              <div>
+                <Link to="/under-dev" className="footer__social-link">
+                  <FaYoutube />
+                </Link>
               </div>
             </div>
           </div>
